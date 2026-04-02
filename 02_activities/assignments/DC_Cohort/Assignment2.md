@@ -56,7 +56,27 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+There are two common architectures for storing customer addresses, corresponding to 
+Type 1 and Type 2 Slowly Changing Dimensions (SCD).
+
+---
+
+Architecture 1 — Type 1 SCD (Overwrite)
+
+In this design, when a customer updates their address, the existing row is simply 
+overwritten with the new values. No history is preserved. This is Type 1 SCD: 
+simple, storage-efficient, but the previous address is permanently lost.
+
+---
+
+Architecture 2 — Type 2 SCD (Retain History)
+
+In this design, when a customer's address changes, the old row is NOT deleted. 
+Instead, its expiry_date is set to today and is_current is flipped to FALSE, 
+and a new row is inserted with the updated address, a new effective_date, and 
+is_current = TRUE. This is Type 2 SCD: it retains the full history of all 
+addresses a customer has ever had, which is useful for auditing or 
+reconstructing past orders.
 ```
 
 ***
@@ -191,5 +211,13 @@ Consider, for example, concepts of labour, bias, LLM proliferation, moderating c
 
 
 ```
-Your thoughts...
+One of the most important ethical issues in this story is the way AI systems hide human labor. Neural networks are often discussed as though they are autonomous and highly intelligent, but in practice they depend on people at every stage. Humans collect the data, label the data, clean the data, review the outputs, and moderate harmful content. The article pushes against the myth that machine learning is purely technical. Instead, it shows that these systems are deeply social and are built on the work of many people whose labor is often invisible.
+
+That leads directly to another ethical issue: exploitation. Much of the labor behind AI systems is outsourced, low-paid, repetitive, and psychologically difficult. Content moderation is a clear example. Workers may be exposed to violent, abusive, or disturbing material for long periods of time, yet they are rarely the public face of the technology industry. Companies benefit from presenting AI as clean and scalable while the human cost is pushed into the background. This creates an imbalance where innovation is celebrated, but the workers who make that innovation possible receive limited recognition, weak protections, and in some cases harmful working conditions.
+
+Bias is also a major issue. AI systems do not invent their values from nowhere. They reflect the judgments, categories, and assumptions present in their training data and in the people who build and label that data. If the source material contains stereotypes or unequal social patterns, the model can reproduce them at scale. This matters because systems that appear objective may still encode unfairness. Once those patterns are embedded in automated tools, they can influence hiring, moderation, recommendations, and many other decisions in ways that are hard to detect.
+
+The story also raises concerns about the rapid proliferation of LLMs and related systems. When companies release models quickly and at large scale, the effects of bias, hallucination, and harmful output are amplified. The speed of deployment can outpace ethical reflection and governance. It is not enough to ask whether a model works technically. We also need to ask who built it, under what conditions, whose values shaped it, and who bears the risks when it fails.
+
+Overall, the article shows that AI is not “just technology.” It is a system of labor, judgment, incentives, and power. The ethical challenge is not only how to make models more accurate, but how to build them in a way that is fair to both the people who create them and the people affected by them.
 ```
